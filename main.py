@@ -6,6 +6,12 @@ def format(lines):
         lines.remove('')
     return lines
 
+def union(lines):
+    code=''
+    for line in lines:
+        code += line
+    return code
+
 def format_spaces(lines):
     for i in range(len(lines)):
         lines[i] = lines[i].replace(' ','')
@@ -16,7 +22,7 @@ def get_lib(line): # Considerando um código sem erros
         lib = line.split('<')[1][:-1]
     except:
         try:
-            lib = line.split('\"')[1][:-1]
+            lib = line.split('\"')[1]
         except:
             pass
     return lib
@@ -46,6 +52,16 @@ def get_libs(lines):
             libs.append(lib)
     return format_spaces(libs)
 
+def include_libs(code, libs):
+
+    for lib in libs:
+        code = code.replace(lib, '')
+
+    for lib in libs:
+        f = union(read("include/"+lib))
+        code = f + code
+    return code
+
 def rmv_comments(lines):
     for i in range(len(lines)):
         aux = lines[i].find('//')
@@ -59,10 +75,23 @@ def rmv_larger_comments(code):
     for word in codes:
         aux = word.find('*/')
         if aux > 0:
-            code+= word[aux+1:]
+            code+= word[aux+2:] # aux+2 pois a posição do */ é index-2
         else:
             code += word
     return code
+
+def rmv_spaces(code):
+    markers = [';', ',', '{', '}', '(', ')', '[', ']']
+    code_aux = ''
+    for i in range(len(code)):
+        if i != 0 and code[i-1] in markers:
+            pass # em produção
+
+def rmv_libs(lines):
+    for i in range(len(lines)):
+        if '#include' in lines[i]:
+            lines[i] = ''
+    return format(lines)
 
 def rmv_defines(lines):
     for i in range(len(lines)):
@@ -93,22 +122,21 @@ def read(file):
         lines = f.readlines()
     return lines
 
-def union(lines):
-    code=''
-    for line in lines:
-        code += line
-    return code
-
 lines = read('teste.c')
 lines = rmv_enter(lines)
 lines = rmv_comments(lines)
 lines = rmv_tab(lines)
+
 libs = get_libs(lines)
 defines = get_defines(lines)
+
 lines = put_defines(lines, defines)
 lines = rmv_defines(lines)
+lines = rmv_libs(lines)
+
 code = union(lines)
 code = rmv_larger_comments(code)
+#code = include_libs(code, libs)
 print(lines)
 print(libs)
 print(defines)
