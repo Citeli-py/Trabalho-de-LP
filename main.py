@@ -147,5 +147,3 @@ code = rmv_larger_comments(code)
 code = rmv_spaces(code)
 code = rmv_enter_code(code)
 print(code)
-
-
