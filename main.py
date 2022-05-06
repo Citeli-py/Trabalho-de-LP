@@ -81,11 +81,13 @@ def rmv_larger_comments(code):
     return code
 
 def rmv_spaces(code):
-    markers = [';', ',', '{', '}', '(', ')', '[', ']']
+    markers = [';', ',', '{', '}', '(', ')', '[', ']', '=']
     code_aux = ''
     for i in range(len(code)):
-        if i != 0 and code[i-1] in markers:
-            pass # em produção
+        if not(code[i] == ' ' and (code[i-1] in markers or code[i+1] in markers)):
+            code_aux += code[i]
+
+    return code_aux
 
 def rmv_libs(lines):
     for i in range(len(lines)):
@@ -135,11 +137,9 @@ lines = rmv_defines(lines)
 lines = rmv_libs(lines)
 
 code = union(lines)
+code = include_libs(code, libs)
 code = rmv_larger_comments(code)
-#code = include_libs(code, libs)
-print(lines)
-print(libs)
-print(defines)
+code = rmv_spaces(code)
 print(code)
 
 
