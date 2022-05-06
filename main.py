@@ -111,6 +111,11 @@ def rmv_enter(lines):
         lines[i] = lines[i].replace('\n','')
     return format(lines)
 
+def rmv_enter_code(code):
+    while code.find('\n')>=0:
+        code = code.replace('\n', '')
+    return code
+
 def put_defines(lines, defines):
     for i in range(len(lines)):
         for define in defines:
@@ -140,6 +145,7 @@ code = union(lines)
 code = include_libs(code, libs)
 code = rmv_larger_comments(code)
 code = rmv_spaces(code)
+code = rmv_enter_code(code)
 print(code)
 
 
