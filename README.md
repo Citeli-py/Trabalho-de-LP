@@ -6,3 +6,8 @@ Basta ter o interpretador do python 3.x na sua máquina, inserir o seu programa 
 ```bash
 py main.py
 ```
+Depois inserir o nome do seu arquivo .c
+```bash
+py main.py
+Digite o arquivo .c: teste.c
+```
