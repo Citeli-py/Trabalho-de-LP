@@ -3,6 +3,6 @@
 
 ##Como utilizar o programa:
 Basta ter o interpretador do python 3.x na sua máquina, inserir o seu programa .c (sem falhas) no diretorio do programa e executar em seu terminal<br>
-```terminal
+```bash
 py main.py
 ```
