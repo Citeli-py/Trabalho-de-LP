@@ -1,6 +1,6 @@
 # função: tipo nome(args,...)
 # atrib: tipo nome=valor;
-
+import os
 def format(lines):
     while '' in lines:
         lines.remove('')
@@ -164,8 +164,10 @@ def put_defines(lines, defines):
     return lines
 
 def read(file):
-    import os
-    os.chdir(os.path.dirname(__file__))
+    try: #Necessário pois há incompatibilidade entre o interpretador do windows com o que eu uso no VScode
+        os.chdir(os.path.dirname(__file__))
+    except Exception:
+        pass
     with open(file) as f:
         lines = f.readlines()
     return lines
