@@ -3,7 +3,11 @@
 
 #define num 2
 #define word "salve fml"
-#define SOMA(a,b) (a+b)
+#define SOMA(a,b) a+b+5*9
+#define A(x) {return 2*x;}
+
+int f(int x)
+    A(x)
 
 int main()
 {
@@ -15,5 +19,6 @@ int main()
     if(a == 2) //Se a == 2 então
         printf("a=2");
     printf("\n%d %s", num, word);
+    x = SOMA(3,5);
     return 0;
 }

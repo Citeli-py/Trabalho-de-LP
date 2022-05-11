@@ -144,7 +144,7 @@ def put_macros(lines, macros):
         for macro in macros:
             if macro[0] in lines[i]:
                 aux = lines[i].split('(')[1][:lines[i].index(')')]
-                param = '('+aux
+                param = '('+aux[:aux.index(')')+1]
 
                 aux = aux.split(',')
                 aux[-1] = aux[-1][:-2]
@@ -152,9 +152,9 @@ def put_macros(lines, macros):
                 params = macro[1].split(',')
                 inst = macro[2]
                 for j in range(len(params)):
-                    inst = inst.replace(aux[j], params[j])
+                    inst = inst.replace(params[j], aux[j])
 
-                lines[i] = lines[i].replace(macro[0]+param, inst+';')
+                lines[i] = lines[i].replace(macro[0]+param, inst)
     return lines
 
 def put_defines(lines, defines):
