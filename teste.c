@@ -4,10 +4,6 @@
 #define num 2
 #define word "salve fml"
 #define SOMA(a,b) a+b+5*9
-#define A(x) {return 2*x;}
-
-int f(int x)
-    A(x)
 
 int main()
 {

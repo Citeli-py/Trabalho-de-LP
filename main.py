@@ -1,7 +1,7 @@
 from pre_processamento import *
 
-#lines = read(input('Digite o arquivo .c: '))
-lines = read("teste.c")
+lines = read(input('Digite o arquivo .c: '))
+#lines = read("teste.c")
 lines = rmv_enter(lines)
 lines = rmv_comments(lines)
 lines = rmv_tab(lines)
@@ -16,7 +16,7 @@ lines = rmv_defines(lines)
 lines = rmv_libs(lines)
 
 code = union(lines)
-#code = include_libs(code, libs)
+code = include_libs(code, libs)
 code = rmv_larger_comments(code)
 code = rmv_spaces(code)
 code = rmv_enter_code(code)
